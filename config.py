@@ -3,3 +3,8 @@ FPS = 60
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+
+MENU = 0
+PLAYING = 1
+GAME_OVER = 2
+current_state = MENU

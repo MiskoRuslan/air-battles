@@ -1,27 +1,20 @@
 import pygame
 import sys
 from menu import draw_menu
-from game import update_game, draw_game
+from game import update_game, draw_game, Airplane
 from game_over import draw_game_over
+from config import WIDTH, HEIGHT, FPS, MENU, PLAYING, GAME_OVER, current_state
 
 pygame.init()
-
-WIDTH, HEIGHT = 800, 600
-FPS = 60
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Air Battle")
 
-MENU = 0
-PLAYING = 1
-GAME_OVER = 2
-current_state = MENU
-
 clock = pygame.time.Clock()
 running = True
-
 play_button = pygame.Rect(300, 200, 200, 100)
-quit_button = pygame.Rect(300, 300, 200, 100)
+quit_button = pygame.Rect(650, 530, 200, 100)
+airplane = Airplane()
 
 while running:
     for event in pygame.event.get():
@@ -36,11 +29,14 @@ while running:
             elif current_state == GAME_OVER and quit_button.collidepoint(event.pos):
                 running = False
 
+    keys = pygame.key.get_pressed()
+    airplane.update(keys)
+
     if current_state == MENU:
         draw_menu(screen, play_button)
     elif current_state == PLAYING:
         update_game()
-        draw_game(screen, quit_button)
+        draw_game(screen, quit_button, airplane)
     elif current_state == GAME_OVER:
         draw_game_over(screen, quit_button)
 
