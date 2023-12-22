@@ -33,3 +33,9 @@ Misko Ruslan 333B
 Цей проект розповсюджується під ліцензією [MIT](LICENSE).
 
 ---
+
+![Screenshot_1.png](screenshots%2FScreenshot_1.png)
+![Screenshot_2.png](screenshots%2FScreenshot_2.png)
+![Screenshot_3.png](screenshots%2FScreenshot_3.png)
+![Screenshot_4.png](screenshots%2FScreenshot_4.png)
+![Screenshot_5.png](screenshots%2FScreenshot_5.png)
