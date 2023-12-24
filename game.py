@@ -4,6 +4,16 @@ import time
 from config import WIDTH, HEIGHT
 
 
+SHOOT_INTERVAL = 0.1
+SHOOT_COUNT = 5
+
+
+TOTAL_SHOOTS = 0
+TOTAL_RECHARGE_TIME = 0
+
+LAST_SHOOT_TIME = time.time()
+
+
 def update_game():
     pass
 
@@ -83,7 +93,6 @@ class Bomb(pygame.sprite.Sprite):
         self.rect.y += self.speed
 
 
-
 def draw_game(screen, quit_button, airplane):
     background_images = load_background_images()
     screen.fill((255, 255, 255))
@@ -111,4 +120,14 @@ def draw_game(screen, quit_button, airplane):
     airplane.bombs.update()
     airplane.bombs.draw(screen)
 
+    global LAST_SHOOT_TIME, TOTAL_SHOOTS, TOTAL_RECHARGE_TIME
+    current_time = time.time()
+    if current_time - LAST_SHOOT_TIME >= SHOOT_INTERVAL:
+        for _ in range(SHOOT_COUNT):
+            airplane.shoot()
+            TOTAL_SHOOTS += 1
+        LAST_SHOOT_TIME = current_time
+        TOTAL_RECHARGE_TIME += SHOOT_INTERVAL
 
+    with open("shoots_stats.txt", "w") as file:
+        file.write(f"Shoots: {TOTAL_SHOOTS}, Recharge Time: {TOTAL_RECHARGE_TIME}")
